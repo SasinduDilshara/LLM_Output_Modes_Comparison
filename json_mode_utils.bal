@@ -1,30 +1,36 @@
 
-isolated function getPromptWithExpectedResponseSchema(string prompt, map<json> schema) returns string =>
-    string `${prompt}
-        ---
-
-        The output should be a JSON value that satisfies the following JSON schema, 
+isolated function getPromptWithExpectedResponseSchema(string prompt, map<json> schema) returns string {
+    string suffix = string `The output should be a JSON value that satisfies the following JSON schema, 
         returned within a markdown snippet enclosed within ${"```json"} and ${"```"}
         
         Schema:
         ${schema.toJsonString()}`;
-
-isolated function getPromptWithExpectedResponseSchemaForSOMode(string prompt, string mode, map<json> schema) returns string {
-    if mode != SO_MODE {
-        return prompt;
+    
+    if prompt == PROMPT_5 {
+        suffix = string `The output strictly should be a 'string'`;
     }
 
-    if !isPromptContainsJsonObjectSchemaType(prompt) {
-        return prompt;
+    if prompt == PROMPT_6 {
+        suffix = string `The output strictly should be a 'integer'. No additional text or explanation is needed.`;
     }
-
+    
     return string `${prompt}
         ---
-
-        The output should be a JSON value that satisfies the following JSON schema, 
-        Schema:
-        ${schema.toJsonString()}`;
+        ${suffix}`;
 }
+
+// isolated function getPromptWithExpectedResponseSchemaForSOMode(string prompt, string mode, map<json> schema) returns string {
+//     if mode != SO_MODE {
+//         return prompt;
+//     }
+
+//     if !isPromptContainsNonJsonSchemaType(prompt) {
+//         return prompt;
+//     }
+
+//     return string `${prompt}. The output should satisfies the ${schema.toJsonString()},
+//         returned within a markdown snippet enclosed within ${"```json"} and ${"```"}`;
+// }
 
 isolated function parseResponseAsJson(string resp) returns json|error {
     int startDelimLength = 7;

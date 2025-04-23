@@ -85,7 +85,7 @@ function handleResponseContent(string? content, string mode,
 
 function parseResponseType(string content, typedesc<anydata> expectedTypeDesc, map<json> schema, 
             string prompt, string mode) returns anydata|error {
-    if mode == TOOL_CALL_WITH_AUTO_MODE || mode == TOOL_CALL_WITH_FORCE_MODE {
+    if mode == TOOL_CALL_WITH_AUTO_MODE || mode == TOOL_CALL_WITH_FORCE_MODE || mode == SO_MODE {
         json contentValue = check content.fromJsonStringWithType(); 
         if !isPromptContainsObjectSchemaReturnType(prompt) {
             map<json> v = check contentValue.fromJsonWithType();
@@ -99,13 +99,14 @@ function parseResponseType(string content, typedesc<anydata> expectedTypeDesc, m
         return parseResponseAsType(content, expectedTypeDesc);
     }
 
-    if mode == SO_MODE {
-        anydata|error result = trap content.fromJsonStringWithType(expectedTypeDesc);
-        if result is error {
-            return handleParseResponseError(result);
-        }
-        return result;
-    }
+    // if mode == SO_MODE {
+    //     return parseResponseAsType(content, expectedTypeDesc);
+    //     // anydata|error result = trap content.fromJsonStringWithType(expectedTypeDesc);
+    //     // if result is error {
+    //     //     return handleParseResponseError(result);
+    //     // }
+    //     // return result;
+    // }
 }
 
 function printResponse(string content, string mode, string prompt, map<json> schema) {

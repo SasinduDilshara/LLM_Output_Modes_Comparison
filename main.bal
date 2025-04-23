@@ -42,7 +42,7 @@ function process() returns error? {
 function processPrompt(string prompt, string mode, string model) returns error? {
     anydata responseResult = null;
     chat:Client|http:Client cl = check getClient(mode, model);
-    map<json> expectedSchema = getExpectedSchema(prompt);
+    map<json> expectedSchema = getExpectedSchema(prompt, mode);
     typedesc<anydata> expectedType = getExpectedType(prompt);
 
     chat:CreateChatCompletionRequest|AzureOpenAICreateChatCompletionRequest request = 

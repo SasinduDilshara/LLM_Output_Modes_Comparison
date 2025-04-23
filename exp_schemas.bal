@@ -141,6 +141,14 @@ map<json> prompt3Schema = {
   ]
 };
 
+map<json> prompt3SchemaNonToolCallingMode = {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "integer"
+  }
+};
+
 map<json> prompt4Schema = {
   "type": "object",
   "properties": {
@@ -156,6 +164,14 @@ map<json> prompt4Schema = {
   ]
 };
 
+map<json> prompt4SchemaNonToolCallingMode = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "array",
+    "items": {
+      "type": "string"
+    }
+};
+
 map<json> prompt5Schema = {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
@@ -169,6 +185,10 @@ map<json> prompt5Schema = {
   ]
 };
 
+map<json> prompt5SchemaNonToolCallingMode = {
+  "type": "string"
+};
+
 map<json> prompt6Schema = {
   "type": "object",
   "properties": {
@@ -179,6 +199,10 @@ map<json> prompt6Schema = {
   "required": [
     "value"
   ]
+};
+
+map<json> prompt6SchemaNonToolCallingMode = {
+  "type": "integer"
 };
 
 map<json> prompt7Schema = {

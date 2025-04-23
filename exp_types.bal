@@ -1,12 +1,12 @@
 // Prompt 1
-type Session record {
+type Session record {|
     string title;
     string date;
     string time;
     string location;
     string[] speakers;
     string description;
-};
+|};
 
 type Product record {
     string name;
@@ -18,11 +18,11 @@ type Customer record {
     string usageSummary;
 };
 
-type User record {
+type User record {|
     string attendeeName;
     string company;
     string role;
-};
+|};
 
 type ConferenceData record {
     Session[] sessions;
@@ -51,13 +51,13 @@ type ReviewSingleWord string;
 type ReviewSingleInteger int;
 
 // Prompt 7
-type Order record {
+type Order record {|
     string OrderID;
     string ProductName;
     int Quantity;
     decimal Price;
     string Date;
-};
+|};
 
 type CustomerDetails record {
     string Name;
@@ -93,7 +93,7 @@ type BusinessData record {
 };
 
 // Prompt 8
-type Event record {
+type Event record {|
     string eventName;
     string eventDate;
     string location;
@@ -106,7 +106,7 @@ type Event record {
     string[] executiveNames;
     string panelModeratorName;
     string panelModeratorAffiliation;
-};
+|};
 
 // Prompt 9
 type InvalidExp Match;

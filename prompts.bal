@@ -166,7 +166,7 @@ Important Rules:
 `;
 
 const PROMPT_3 = string `
-You are tasked with reviewing customer feedback and assigning a quality score to each review based on the following criteria:
+You are tasked with reviewing customer feedback and assigning a quality score to each review based on the following criteria and return the scores as a integer array:
 
 Scoring Criteria:
 - 9–10: Exceptional — Strongly positive, enthusiastic, and highly satisfied feedback.
@@ -443,40 +443,40 @@ function isPromptContainsObjectSchemaReturnType(string prompt) returns boolean {
     }
 }
 
-isolated function isPromptContainsJsonObjectSchemaType(string prompt) returns boolean {
-    match prompt {
-        PROMPT_1 => {
-          return false;
-        }
-        PROMPT_2 => {
-          return false;
-        }
-        PROMPT_3 => {
-          return true;
-        }
-        PROMPT_4 => {
-          return true;
-        }
-        PROMPT_5 => {
-          return false;
-        }
-        PROMPT_6 => {
-          return false;
-        }
-        PROMPT_7 => {
-          return false;
-        }
-        PROMPT_8 => {
-          return false;
-        }
-        PROMPT_9 => {
-          return false;
-        }
-        _ => {
-          return false;
-        }
-    }
-}
+// isolated function isPromptContainsNonJsonSchemaType(string prompt) returns boolean {
+//     match prompt {
+//         PROMPT_1 => {
+//           return false;
+//         }
+//         PROMPT_2 => {
+//           return false;
+//         }
+//         PROMPT_3 => {
+//           return true;
+//         }
+//         PROMPT_4 => {
+//           return true;
+//         }
+//         PROMPT_5 => {
+//           return true;
+//         }
+//         PROMPT_6 => {
+//           return true;
+//         }
+//         PROMPT_7 => {
+//           return false;
+//         }
+//         PROMPT_8 => {
+//           return false;
+//         }
+//         PROMPT_9 => {
+//           return false;
+//         }
+//         _ => {
+//           return false;
+//         }
+//     }
+// }
 
 function getExpectedType(string prompt) returns typedesc<anydata> {
     match prompt {
@@ -499,7 +499,7 @@ function getExpectedType(string prompt) returns typedesc<anydata> {
           return ReviewSingleInteger;
         }
         PROMPT_7 => {
-          return Order;
+          return BusinessData;
         }
         PROMPT_8 => {
           return Event;
@@ -513,7 +513,12 @@ function getExpectedType(string prompt) returns typedesc<anydata> {
     }
 }
 
-function getExpectedSchema(string prompt) returns map<json> {
+function getExpectedSchema(string prompt, string mode) returns map<json> {
+    boolean isUpdatedJsonSchema = false;
+    if mode == TOOL_CALL_WITH_AUTO_MODE || mode == TOOL_CALL_WITH_FORCE_MODE || mode == SO_MODE {
+        isUpdatedJsonSchema = true;
+    }
+
     match prompt {
         PROMPT_1 => {
           return prompt1Schema;
@@ -522,16 +527,16 @@ function getExpectedSchema(string prompt) returns map<json> {
           return prompt2Schema;
         }
         PROMPT_3 => {
-          return prompt3Schema;
+          return isUpdatedJsonSchema ? prompt3Schema: prompt3SchemaNonToolCallingMode;
         }
         PROMPT_4 => {
-          return prompt4Schema;
+          return isUpdatedJsonSchema ? prompt4Schema: prompt4SchemaNonToolCallingMode;
         }
         PROMPT_5 => {
-          return prompt5Schema;
+          return isUpdatedJsonSchema ? prompt5Schema: prompt5SchemaNonToolCallingMode;
         }
         PROMPT_6 => {
-          return prompt6Schema;
+          return isUpdatedJsonSchema ? prompt6Schema: prompt6SchemaNonToolCallingMode;
         }
         PROMPT_7 => {
           return prompt7Schema;
@@ -558,24 +563,16 @@ function getSoConfigsForPropmt(string prompt, map<json> schema)
             return getJsonSchemaSoConfigs(schema);
         }
         PROMPT_3 => {
-          return {
-            'type: "json_object"
-          };
+            return getJsonSchemaSoConfigs(schema);
         }
         PROMPT_4 => {
-          return {
-            'type: "json_object"
-          };
+            return getJsonSchemaSoConfigs(schema);
         }
         PROMPT_5 => {
-          return {
-            'type: "text"
-          };
+            return getJsonSchemaSoConfigs(schema);
         }
         PROMPT_6 => {
-          return {
-            'type: "text"
-          };
+            return getJsonSchemaSoConfigs(schema);
         }
         PROMPT_7 => {
             return getJsonSchemaSoConfigs(schema);

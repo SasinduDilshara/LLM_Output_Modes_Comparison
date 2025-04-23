@@ -84,7 +84,7 @@ function openAi4OMiniJsonModeRequest(string prompt, string model, map<json> sche
 
 function openAi4OMiniSOModeRequest(string prompt, string mode, string model, map<json> schema) returns chat:CreateChatCompletionRequest|error {
     return {
-        messages: [{role: "user", content: getPromptWithExpectedResponseSchemaForSOMode(prompt, mode, schema)}],
+        messages: [{role: "user", content: prompt}],
         response_format: getResponseFormatType(prompt, schema),
         model: model
     };
@@ -138,7 +138,7 @@ function openAi4OJsonModeRequest(string prompt, string model, map<json> schema)
 
 function openAi4OSOModeRequest(string prompt, string mode, string model, map<json> schema) returns chat:CreateChatCompletionRequest|error {
     return {
-        messages: [{role: "user", content: getPromptWithExpectedResponseSchemaForSOMode(prompt, mode, schema)}],
+        messages: [{role: "user", content: prompt}],
         response_format: getResponseFormatType(prompt, schema),
         model: model
     };
@@ -192,7 +192,7 @@ function azureOpenAi4OMiniJsonModeRequest(string prompt, string model, map<json>
 function azureOpenAi4OMiniSOModeRequest(string prompt, string mode, string model, map<json> schema) 
         returns AzureOpenAICreateChatCompletionRequest|error {
     return {
-        messages: [{role: "user", content: getPromptWithExpectedResponseSchemaForSOMode(prompt, mode, schema)}],
+        messages: [{role: "user", content: prompt}],
         response_format: getResponseFormatType(prompt, schema)
     };
 }
@@ -245,7 +245,7 @@ function azureOpenAi4OJsonModeRequest(string prompt, string model, map<json> sch
 function azureOpenAi4OSOModeRequest(string prompt, string mode, string model, map<json> schema) 
         returns AzureOpenAICreateChatCompletionRequest|error {
     return {
-        messages: [{role: "user", content: getPromptWithExpectedResponseSchemaForSOMode(prompt, mode, schema)}],
+        messages: [{role: "user", content: prompt}],
         response_format: getResponseFormatType(prompt, schema)
     };
 }
