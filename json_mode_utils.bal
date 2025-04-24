@@ -7,11 +7,13 @@ isolated function getPromptWithExpectedResponseSchema(string prompt, map<json> s
         ${schema.toJsonString()}`;
     
     if prompt == PROMPT_5 {
-        suffix = string `The output strictly should be a 'string'`;
+        suffix = string `The output strictly should be a 'string', 
+        returned within a markdown snippet enclosed within ${"```json"} and ${"```"}`;
     }
 
     if prompt == PROMPT_6 {
-        suffix = string `The output strictly should be a 'integer'. No additional text or explanation is needed.`;
+        suffix = string `The output strictly should be a 'integer'. No additional text or explanation is needed., 
+        returned within a markdown snippet enclosed within ${"```json"} and ${"```"}`;
     }
     
     return string `${prompt}

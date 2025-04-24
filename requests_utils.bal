@@ -99,6 +99,7 @@ function openAi4OMiniToolCallForceModeRequest(string prompt, string model, map<j
                 'type: "function",
                 'function: {
                     name: TOOL_NAME,
+                    description: getToolCallingDescription(prompt, schema),
                     parameters: schema
                 }
             }
@@ -121,6 +122,7 @@ function openAi4OMiniToolCallAutoModeRequest(string prompt, string model, map<js
                 'type: "function",
                 'function: {
                     name: TOOL_NAME,
+                    description: getToolCallingDescription(prompt, schema),
                     parameters: schema
                 }
             }
@@ -153,6 +155,7 @@ function openAi4OToolCallForceModeRequest(string prompt, string model, map<json>
                 'type: "function",
                 'function: {
                     name: TOOL_NAME,
+                    description: getToolCallingDescription(prompt, schema),
                     parameters: schema
                 }
             }
@@ -175,6 +178,7 @@ function openAi4OToolCallAutoModeRequest(string prompt, string model, map<json> 
                 'type: "function",
                 'function: {
                     name: TOOL_NAME,
+                    description: getToolCallingDescription(prompt, schema),
                     parameters: schema
                 }
             }
@@ -206,6 +210,7 @@ function azureOpenAi4OMiniToolCallForceModeRequest(string prompt, string model, 
                 'type: "function",
                 'function: {
                     name: TOOL_NAME,
+                    description: getToolCallingDescription(prompt, schema),
                     parameters: schema
                 }
             }
@@ -228,6 +233,7 @@ function azureOpenAi4OMiniToolCallAutoModeRequest(string prompt, string model, m
                 'type: "function",
                 'function: {
                     name: TOOL_NAME,
+                    description: getToolCallingDescription(prompt, schema),
                     parameters: schema
                 }
             }
@@ -259,6 +265,7 @@ function azureOpenAi4OToolCallForceModeRequest(string prompt, string model, map<
                 'type: "function",
                 'function: {
                     name: TOOL_NAME,
+                    description: getToolCallingDescription(prompt, schema),
                     parameters: schema
                 }
             }
@@ -281,6 +288,7 @@ function azureOpenAi4OToolCallAutoModeRequest(string prompt, string model, map<j
                 'type: "function",
                 'function: {
                     name: TOOL_NAME,
+                    description: getToolCallingDescription(prompt, schema),
                     parameters: schema
                 }
             }

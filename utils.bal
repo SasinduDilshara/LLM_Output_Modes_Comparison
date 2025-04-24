@@ -70,3 +70,7 @@ function writeToCsvFile(string prompt, string model, string mode, anydata respon
     string csvPath = getCsvPath(prompt, model, mode);
     check io:fileWriteCsv(csvPath, [[responseResult.toString()]]);
 }
+
+function getToolCallingDescription(string prompt, map<json> schema) returns string {
+    return string `If the expected schema of this tool is relevant/suitable to the expected output of the user prompt, this tool must be called.`;
+}
