@@ -1,4 +1,4 @@
-const ITERATIONS = 2;
+const ITERATIONS = 100;
 
 const JSON_MODE = "JSON_MODE";
 const SO_MODE = "SO_MODE";
@@ -18,8 +18,8 @@ const AZURE_OPENAI_4O_MINI_MODEL = "azure-gpt-4o-mini";
 const AZURE_OPENAI_4O_MODEL = "azure-gpt-4o";
 
 const MODELS = [
-    OPENAI_4O_MINI_MODEL,
-    OPENAI_4O_MODEL,
     AZURE_OPENAI_4O_MINI_MODEL,
-    AZURE_OPENAI_4O_MODEL
+    AZURE_OPENAI_4O_MODEL,
+    OPENAI_4O_MINI_MODEL,
+    OPENAI_4O_MODEL
 ];

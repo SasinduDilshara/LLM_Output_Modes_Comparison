@@ -1,6 +1,7 @@
 import ballerina/http;
 import ballerinax/openai.chat as openaiChat;
 import ballerina/url;
+import ballerina/io;
 
 const resourcePath = "./resources";
 const csvFolderName = "csvs";
@@ -39,8 +40,7 @@ function getClient(string mode, string model) returns openaiChat:Client|http:Cli
 
 function getAzureDeployementId(string model) returns string|error {
     if (model == AZURE_OPENAI_4O_MINI_MODEL) {
-        // return "gpt4o-stand";
-        return "gpt4o-mini-stand";
+        return "gpt-4o-stand";
     }
     
     if (model == AZURE_OPENAI_4O_MODEL) {
@@ -64,4 +64,9 @@ function getJsonSchemaSoConfigs(map<json> schema) returns ResponseFormatJsonSche
         schema: schema
       }
     };  
+}
+
+function writeToCsvFile(string prompt, string model, string mode, anydata responseResult) returns error? {
+    string csvPath = getCsvPath(prompt, model, mode);
+    check io:fileWriteCsv(csvPath, [[responseResult.toString()]]);
 }
